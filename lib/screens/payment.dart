@@ -75,21 +75,19 @@ class _PaymentState extends State<Payment> {
     final cdate = DateFormat('EEEE, d MMMM yyyy').format(now);
     final ctime = DateFormat('HH:mm:ss').format(now);
     final cdatetime = DateFormat('EEEE, d MMMM yyyy HH:mm:ss').format(now);
-    print(cdatetime);
+   
     final selectedClient = widget.clients[selectedIndex];
 
     final int id = int.tryParse(selectedClient['id'].toString()) ?? 0;
-    print('Selected ID: $id');
 
     final client = await _databaseService.selectUser(id);
-    final amt = await _databaseService.selectAmount('payments',id);
+    final amt = await _databaseService.selectAmount('payments', id);
     final fetchedClients = await _databaseService.getAllClientIds();
 
     final existingPayment = (amt?['payment'] as num).toDouble();
     final enteredAmount = double.tryParse(amountcontroller.text) ?? 0.0;
 
     final amount = existingPayment + enteredAmount;
-    print(amount);
 
     await _databaseService.updateCash(
       cidentity: client?['identity'],
@@ -121,18 +119,12 @@ class _PaymentState extends State<Payment> {
   }
 
   Future<void> payment() async {
-    final DateTime now = DateTime.now();
-
-    final cdatetime = DateFormat('EEEE, d MMMM yyyy HH:mm:ss').format(now);
-    print(cdatetime);
     final selectedClient = widget.clients[selectedIndex];
 
     final int id = int.tryParse(selectedClient['id'].toString()) ?? 0;
-    print('Selected ID: $id');
 
-    final amt = await _databaseService.selectAmount('payments',id);
+    final amt = await _databaseService.selectAmount('payments', id);
     final client = await _databaseService.selectUser(id);
-    print(client);
 
     if (!mounted) return;
 
@@ -358,8 +350,18 @@ class _PaymentState extends State<Payment> {
                                       height: screenHeight * 0.12,
                                       decoration: BoxDecoration(
                                         color: index == selectedIndex
-                                            ? const Color.fromARGB(255, 98, 6, 145)
-                                            : const Color.fromARGB(255, 59, 8, 85),
+                                            ? const Color.fromARGB(
+                                                255,
+                                                98,
+                                                6,
+                                                145,
+                                              )
+                                            : const Color.fromARGB(
+                                                255,
+                                                59,
+                                                8,
+                                                85,
+                                              ),
 
                                         borderRadius: BorderRadius.circular(12),
                                       ),
@@ -546,9 +548,7 @@ class _PaymentState extends State<Payment> {
                         height: screenWidth * 0.13,
                         width: screenWidth * 0.72,
                         child: ElevatedButton(
-                          onPressed: () {
-                            print('Well');
-                          },
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color.fromARGB(
                               200,
@@ -618,13 +618,7 @@ class _PaymentState extends State<Payment> {
               ],
             ),
 
-
-
-
             // ------------------------------History Starts from here ------------------
-
-
-
             Stack(
               children: [
                 SizedBox(
@@ -681,8 +675,18 @@ class _PaymentState extends State<Payment> {
                                       height: screenHeight * 0.12,
                                       decoration: BoxDecoration(
                                         color: index == historyIndex
-                                            ? const Color.fromARGB(255, 98, 6, 145)
-                                            : const Color.fromARGB(255, 59, 8, 85),
+                                            ? const Color.fromARGB(
+                                                255,
+                                                98,
+                                                6,
+                                                145,
+                                              )
+                                            : const Color.fromARGB(
+                                                255,
+                                                59,
+                                                8,
+                                                85,
+                                              ),
 
                                         borderRadius: BorderRadius.circular(12),
                                       ),
@@ -869,9 +873,7 @@ class _PaymentState extends State<Payment> {
                         height: screenWidth * 0.13,
                         width: screenWidth * 0.72,
                         child: ElevatedButton(
-                          onPressed: () {
-                            print('Well');
-                          },
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color.fromARGB(
                               200,
@@ -945,4 +947,4 @@ class _PaymentState extends State<Payment> {
       ),
     );
   }
-  }
+}
